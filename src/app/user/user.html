@@ -1,0 +1,9 @@
+<div>
+    <!-- Even Binding -->
+    <button (click)="onSelectUser()">
+        <!-- Property binding : This will change when the imagePath getter will change due to Angular change detection mechanism-->
+        <img [src]="imagePath" [alt]="selectedUser.name" />
+        <!-- String interpolation -->
+        <span>{{ selectedUser.name }}</span>
+    </button>
+</div>
