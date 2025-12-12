@@ -1,7 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, Input, signal } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
-
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
 
 @Component({
   selector: 'app-user',
@@ -10,19 +8,20 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
   styleUrl: './user.css',
 })
 export class User {
-  // No need of varibale type
-  selectedUser = signal(DUMMY_USERS[randomIndex])
+  // ! means that this varible will be initialized outside from this component
+  //? ---> : string shows the type of this variable
+  // {required : true} will help us in debugging. If we forgot to send it from template, file then because of this property we will see an error
+  
+  @Input({required : true}) avatar !: string;
+  @Input({required : true}) name!: string;
 
-  // This computed method is used with singal, It gives the updated value with signal can use.
-  // This is effecient way of updating the signal value
-  // This below method will be called automatically when ever the value of signal changes
-  imagePath = computed(()=> '../../assets/users/' + this.selectedUser().avatar)
+
+  get imagePath() {
+    return '../../assets/users/' + this.avatar;
+  }
 
   // Methods which are ment for even binding typically starts with 'on'
-  onSelectUser(){
-    // console.log("Clicked!!");
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
-    this.selectedUser.set(DUMMY_USERS[randomIndex]);
-    // this.selectedUser = DUMMY_USERS[randomIndex]
+  onSelectUser() {
+    console.log(this.avatar);
   }
 }
