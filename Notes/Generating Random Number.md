@@ -87,4 +87,9 @@ const randomUser = DUMMY_USERS[randomIndex];
 
 > “Generate a random number between 0 and 1, scale it to the array length, and round it down to pick a random array index.”
 
+## Why to use signal over Change Detection
+
+Change detection = “Scan the entire app every time anything happens.”
+Signals = “Only update the exact thing that changed.”
+
 ---
