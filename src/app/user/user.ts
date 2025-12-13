@@ -1,4 +1,4 @@
-import { Component, computed, input, Input } from '@angular/core';
+import { Component, Output,Input, EventEmitter, input, output } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
 
 @Component({
@@ -9,21 +9,26 @@ import { DUMMY_USERS } from './dummy-users';
 })
 export class User {
 
-  // @Input({required : true}) avatar !: string;
-  // @Input({required : true}) name!: string;
+  @Input({required : true}) avatar !: string;
+  @Input({required : true}) name!: string;
 
-  // These are signal input. Simply signals which we are getting from input method
-  // These are just read only signals. You can chnage their values.
-  avatar = input.required<string>();
-  name = input.required<string>();
+  // Input as a signal : Mordern way
+  // This is an input as a signal
+  id = input.required<string>()
 
-  imagePath = computed(()=>{
-    return '../../assets/users/' + this.avatar();
-  });
+  // Emitting data from child to parent using Output decorater
+  // @Output() select = new EventEmitter<string>();
 
+  // Using output method : Modern way
+  // This is not signal.
+  select = output<string>();
+
+  get imagePath(){
+    return "../../assets/users/" + this.avatar;
+  }
 
   // Methods which are ment for even binding typically starts with 'on'
   onSelectUser() {
-    console.log(this.avatar);
+    this.select.emit(this.id());  // Signals are always used as a method
   }
 }
