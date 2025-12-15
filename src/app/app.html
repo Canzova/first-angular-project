@@ -1,30 +1,29 @@
 <header-component />
 <main>
-    <ul id="users">
-        <li>
-            <!-- $event will give us the value which we are emitting -->
-            <app-user [id]="user[0].id" [avatar]="user[0].avatar" , [name]="user[0].name" ,
-                (select)="onSelectUser($event)" />
-        </li>
-        <li>
-            <app-user [id]="user[1].id" [avatar]="user[1].avatar" , [name]="user[1].name" ,
-                (select)="onSelectUser($event)" />
-        </li>
-        <li>
-            <app-user [id]="user[2].id" [avatar]="user[2].avatar" , [name]="user[2].name" ,
-                (select)="onSelectUser($event)" />
-        </li>
-        <li>
-            <app-user [id]="user[3].id" [avatar]="user[3].avatar" , [name]="user[3].name" ,
-                (select)="onSelectUser($event)" />
-        </li>
-        <li>
-            <app-user [id]="user[4].id" [avatar]="user[4].avatar" , [name]="user[4].name" ,
-                (select)="onSelectUser($event)" />
-        </li>
-    </ul>
+  <ul id="users">
+    @for (user of users; track user.id) {
+    <li>
+      <!-- $event will give us the value which we are emitting -->
+      <app-user [id]="user.id" [avatar]="user.avatar" [name]="user.name" (select)="onSelectUser($event)"
+        [selected]="(selectedUser?.id === user.id)" />
+    </li>
+    }
 
-    <div>
-        <app-task [user] = "selectedUser"/>
-    </div>
+    <!-- 
+            Using Structural directives
+        <li *ngFor="let user of users">
+            <app-user [id]="user.id" [avatar]="user.avatar" [name]="user.name" (select)="onSelectUser($event)" />
+        </li> 
+        
+        -->
+  </ul>
+
+  <div>
+    @if(selectedUser){<app-task [user]="selectedUser" />}
+    @else{
+        <p id="fallback">
+            Select a user to see thier tasks!
+        </p>
+        }
+  </div>
 </main>

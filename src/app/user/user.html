@@ -1,6 +1,7 @@
 <div>
     <!-- Even Binding -->
-    <button (click)="onSelectUser()">
+     <!-- [class.active] = "selected()" -->
+    <button [class.active] = "selected()"  (click)="onSelectUser()">
         <!-- Property binding : This will change when the imagePath getter will change due to Angular change detection mechanism-->
         <img [src]="imagePath" [alt]="name" />
         <!-- String interpolation -->

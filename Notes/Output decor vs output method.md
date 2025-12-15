@@ -67,6 +67,8 @@ select = output<string>();
   <app-child (select)="onSelect($event)"></app-child>
   ```
 
+  **event will have the value emittef from child**
+
 ### Characteristics
 
 * New, modern API

@@ -1,3 +1,42 @@
-<p>
-    {{user()?.name}}
-</p>
+@if (isAddingTask) {
+    <app-add-task [present]="isAddingTask" (close)="onAddTask()" (newTask)="addNewTask($event)"/>
+}
+
+<section id="tasks">
+    <header>
+        <!-- Show this h1 tag on DOM only if user() exits -->
+        @if(user()){
+        <h2>
+            {{user().name}}'s Tasks
+        </h2>
+        }
+        <menu>
+            <button (click) = "onAddTask()">Add Task</button>
+            
+        </menu>
+    </header>
+
+
+    <ul>
+        @for (task of filterDummyTask; track task.id) {
+        <li>
+            <app-individual-task [task]="task" (deletedTask)="deleteTask($event)" />
+        </li>
+        }
+    </ul>
+</section>
+
+<!-- 
+    Using structural directive
+
+<h1 *ngIf="user()" ; else fallback>
+    {{user().name}}
+</h1>
+
+<ng-template>
+    <p id="fallback">
+        Select a user to see thier tasks!
+    </p>
+</ng-template> 
+
+-->

@@ -1,9 +1,7 @@
 import { Component, Output,Input, EventEmitter, input, output } from '@angular/core';
-import { DUMMY_USERS } from './dummy-users';
 
 @Component({
   selector: 'app-user',
-  imports: [],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
@@ -15,6 +13,7 @@ export class User {
   // Input as a signal : Mordern way
   // This is an input as a signal
   id = input.required<string>()
+  selected = input<boolean>(false);
 
   // Emitting data from child to parent using Output decorater
   // @Output() select = new EventEmitter<string>();
